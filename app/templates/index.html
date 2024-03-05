@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gen AI Customer Support Testsite</title>
+	    <style>
+        /* Add your CSS styles for the chat window here */
+        #chat-container {
+            position: fixed;
+            bottom: 0;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: none; /* Initially hide the chat window */
+        }
+
+        .chat-header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .chat-content {
+            padding: 10px;
+            overflow-y: auto;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Products</h1>
+    <ul>
+        {% for product in products %}
+            <li>{{ product.name }} - ${{ product.price }} <a href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a></li>
+        {% endfor %}
+    </ul>
+    <!-- Talk to me icon -->
+    <div id="chat-icon" style="position: fixed; bottom: 10px; right: 10px; cursor: pointer;">Talk to me</div>
+
+    <!-- Chat container -->
+    <div id="chat-container">
+        <div class="chat-header">Chat</div>
+        <div class="chat-content">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <input type="text" id="chat-input" placeholder="Type your message...">
+        <button id="send-message">Send</button>
+    </div>
+    <script>
+        // JavaScript code for chat window functionality
+        document.getElementById('chat-icon').addEventListener('click', function() {
+            document.getElementById('chat-container').style.display = 'block';
+        });
+
+        document.querySelector('.chat-header').addEventListener('click', function() {
+            document.getElementById('chat-container').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
